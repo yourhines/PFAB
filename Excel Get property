@@ -1,0 +1,64 @@
+Module1]
+Sub Macro1()
+'
+' Macro1 Macro
+
+Dim returnvar As String
+Dim recoil As DAS110110
+Set recoil = New DAS110110
+returnvar = recoil.NK454
+End Sub
+
+
+[DAS110110]
+Option Explicit
+
+Public Property Get NK454() As Variant
+'
+' Modular removes cells with zero values
+'
+Dim x, y As Integer
+
+x = 2
+y = 3
+'
+Sheets("Copy to").Select
+'
+Range("C" & x & ":C" & x).Select
+
+Dim wsvar, sws As String
+Dim ivar As Integer
+Dim bflag As Boolean
+bflag = False
+'
+Do While x < 5640 'Last search in file
+'
+    wsvar = ActiveCell.Address(ReferenceStyle:=xlR1C1)
+    Debug.Print wsvar
+    '
+    sws = "C"
+    ivar = InStr(2, wsvar, sws)
+    ivar = Mid$(wsvar, 2, ivar - 2)
+
+    If ActiveCell.Value = 0 And Not IsEmpty(ActiveCell.Value) Then
+        Selection.Delete Shift:=xlUp
+        GoTo bypass
+    End If
+    '
+    If Not IsEmpty(ActiveCell.Value) Then
+        x = ivar
+        y = y + 1
+        Cells(2, y).Activate
+    ElseIf IsEmpty(ActiveCell.Value) Then
+        y = y + 1
+        Cells(2, y).Activate
+    End If
+    
+bypass:
+'
+    If y = 67 Then
+    'Stop
+        Exit Do
+    End If
+Loop
+End Property
