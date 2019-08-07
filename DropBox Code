@@ -1,0 +1,50 @@
+Private Sub Workbook_Open()
+Dim W As Integer
+Dim svar2 As String
+'
+
+Sheet1.cmb1.Clear
+Sheet1.cmb2.Clear
+
+W = 12
+Sheet1.cmb1.AddItem ""
+
+Sheet1.Cells(W, 9).Activate
+svar1 = ActiveCell.Value
+Do While svar1 <> Empty   'ADD ONE
+    Sheet1.cmb1.AddItem Trim(svar1)
+    '
+    W = W + 1
+    Sheet1.Cells(W, 9).Activate
+    svar1 = ActiveCell.Value
+Loop
+'
+W = 12
+Sheet1.cmb2.AddItem ""
+
+Sheet1.Cells(W, 10).Activate
+svar1 = ActiveCell.Value
+Dim icount As Integer
+icount = 0
+'
+Do While svar1 <> Empty 'ADD ONE
+    Sheet1.cmb2.AddItem Trim(svar1)
+    '
+    W = W + 1
+    Sheet1.Cells(W, 10).Activate
+    svar1 = ActiveCell.Value
+    '
+    If svar1 = Empty And icount = 0 Then
+        icount = icount + 1
+        Sheet1.cmb2.AddItem Trim("")
+        W = W + 1
+        Sheet1.Cells(W, 10).Activate
+        svar1 = ActiveCell.Value
+    End If
+Loop
+
+Sheet1.Cells(11, 1).Activate
+
+
+
+End Sub
