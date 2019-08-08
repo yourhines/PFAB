@@ -5,7 +5,9 @@ Create the formulas to scrub text
 
 
 if(D55="","",WORKDAY(D55,E55,$R$55:$R$74))
+
 DisplayGridlines = False
+
 VLOOKUP($B3,$S$8:$T$14,2,1)
 
 
