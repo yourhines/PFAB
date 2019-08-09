@@ -1,7 +1,10 @@
-Private Sub sbClearControls()
-Public frmParent As Form
+Public Sub sbClearControls()
+
+Dim frmParent As Form
 Set frmParent = Me.Parent
+
 On Error GoTo err_handler
+
     Dim objCtrl As Control
     
     frmParent.RecordSource = "Select * from qFormMaterialAvailability where Maid = 0"
@@ -15,12 +18,11 @@ On Error GoTo err_handler
             Next
         End With
     
+Exit_Here:
     Exit Sub
-err_handler:
-    
-'    Debug.Print Tab(5); Err.Number; Tab(5); Err.Description
-    Err.Clear
-'    Stop
-    Resume Next
+
+Error_Handler:
+    If Err = 3021 Then Exit Sub
+    MsgBox "(" & Err & ") " & Err.Description, vbCritical, "Error"
 End Sub
 
