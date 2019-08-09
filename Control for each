@@ -1,0 +1,26 @@
+Private Sub sbClearControls()
+Public frmParent As Form
+Set frmParent = Me.Parent
+On Error GoTo err_handler
+    Dim objCtrl As Control
+    
+    frmParent.RecordSource = "Select * from qFormMaterialAvailability where Maid = 0"
+    
+        With frmParent
+            For Each objCtrl In .Controls
+                If objCtrl.ControlType = acTextBox And objCtrl.Tag = "MatlTxt" Then
+                    Debug.Print objCtrl.Name; "  "; Tab; objCtrl.Tag
+                    objCtrl.Value = ""
+                End If
+            Next
+        End With
+    
+    Exit Sub
+err_handler:
+    
+'    Debug.Print Tab(5); Err.Number; Tab(5); Err.Description
+    Err.Clear
+'    Stop
+    Resume Next
+End Sub
+
