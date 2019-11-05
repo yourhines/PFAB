@@ -23,3 +23,6 @@ Dim varxArFlds() As Variant
 ReDim varxArFlds(1)
 
 ReDim Preserve varxArFlds(x)
+
+remove char from name like O'Relly
+sSChar = """'""" & "," & """"""
